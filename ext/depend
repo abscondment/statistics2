@@ -1,0 +1,2 @@
+statistics.o: statistics.c $(hdrdir)/ruby.h $(hdrdir)/config.h \
+$(hdrdir)/defines.h $(hdrdir)/intern.h $(hdrdir)/missing.h
