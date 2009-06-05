@@ -2,20 +2,20 @@
    statistics2.c
 
    distributions of statistics2             
-     by Shin-ichiro HARA
+   by Shin-ichiro HARA
 
    2003.09.25
 
    Ref:
-     [1] http://www.matsusaka-u.ac.jp/~okumura/algo/
-     [2] http://www5.airnet.ne.jp/tomy/cpro/sslib11.htm
+   [1] http://www.matsusaka-u.ac.jp/~okumura/algo/
+   [2] http://www5.airnet.ne.jp/tomy/cpro/sslib11.htm
 */
 
 #include "ruby.h"
 #include <math.h>
 #include <errno.h>
 
-#define PI      3.14159265358979324
+#define PI 3.14159265358979324
 #define Need_Float(x) (x) = rb_Float(x)
 
 VALUE rb_mStatistics2;
@@ -79,13 +79,13 @@ static double pnorm(double qn)
 
 /* normal-distribution interface */
 static double normaldist(z)
-     double z;
+    double z;
 {
     return p_nor(z);
 }
 
 static double pnormaldist(qn)
-     double qn;
+    double qn;
 {
     return pnorm(qn);
 }
@@ -117,44 +117,44 @@ static double q_chi2(int df, double chi2)
 
 /* inverse of chi-square distribution */
 static double chi2dens(n, x)
-     int n;
-     double x;
+    int n;
+double x;
 {
     double n2 = ((double) n)/2.0;
     return 1.0 / pow(2, n2) / gamma(n2) * pow(x,(n2 - 1.0)) * exp(-x/2.0);
 }
 
 /*
-static double newton_chi(n, y, ini)
-     int n;
-     double y, ini;
-{
-    double epsilon = 1.0e-6, x = ini, prev, df, f;
-    int limit = 30, i;
-    for (i = 0; i < 30; i++) {
-        prev = x;
-        f = q_chi2(n, prev);
-        df = - chi2dens(n, prev);
-        x = (y - f)/df + prev;
-        if (fabs(x - prev) < epsilon) return x;
-    }
-    fprintf(stderr, "Warning(newton approximation): over limit\n");
-    return x;
-}
+  static double newton_chi(n, y, ini)
+  int n;
+  double y, ini;
+  {
+  double epsilon = 1.0e-6, x = ini, prev, df, f;
+  int limit = 30, i;
+  for (i = 0; i < 30; i++) {
+  prev = x;
+  f = q_chi2(n, prev);
+  df = - chi2dens(n, prev);
+  x = (y - f)/df + prev;
+  if (fabs(x - prev) < epsilon) return x;
+  }
+  fprintf(stderr, "Warning(newton approximation): over limit\n");
+  return x;
+  }
 */
 
 /* [x, \infty) */
 static double pchi2(y, n)
-     int n;
-     double y;
+    int n;
+double y;
 {
     double v, s, qe, eps, w;
     if (n == 1) {
         w = pnorm(1.0 - y/2);
         return(w * w);
     } else if (n == 2) {
-/*        v = (1.0 / y - 1.0) / 33.0;
-          return newton_chi(n, y, v); */
+        /*        v = (1.0 / y - 1.0) / 33.0;
+                  return newton_chi(n, y, v); */
         return(-2.0 * log(y));
     }
     else {
@@ -177,15 +177,15 @@ static double pchi2(y, n)
 /* chi-square-distribution interface */
 
 static double chi2dist(df, chi2)
-     int df;
-     double chi2;
+    int df;
+double chi2;
 {
     return 1.0 - q_chi2(df, chi2);
 }
 
 static double pchi2dist(n, y)
-     double y;
-     int n;
+    double y;
+int n;
 {
     return pchi2(1.0 - y, n);
 }
@@ -268,22 +268,22 @@ double pt(double q, int n)
 	w += ((3. * w2 + 19. * w1 + 17. * w0 - 15. * u) / f3);
 	w += ((79. * w3 + 776. * w2 + 1482. * w1 - 1920. * w0 - 945. * u) / f4);
 	w += ((27. * w4 + 339. * w3 + 930. * w2 - 1782. * w1 - 765. * w0
-		+ 17955. * u) / f5);
+           + 17955. * u) / f5);
 	return u + w;
 }
 
 
 /* t-distribution interface */
 static double tdist(n, t)
-     int n;
-     double t;
+    int n;
+double t;
 {
     return p_t(n, t);
 }
 
 static double ptdist(n, y)
-     double y;
-     int n;
+    double y;
+int n;
 {
     return (y > 0.5 ? pt(2.0 - y*2.0, n) : -pt(y*2.0, n));
 }
@@ -346,13 +346,13 @@ double pf(double q, int n1, int n2)
 		fw = 0.;
 		for(;;)
 		{
-                    fw += s;
-                    if(s <= eps)	return fw;
-                    if((qe = q_f(n1, n2, fw) - q) == 0.) return fw;
-                    if(qe < 0.)
+            fw += s;
+            if(s <= eps)	return fw;
+            if((qe = q_f(n1, n2, fw) - q) == 0.) return fw;
+            if(qe < 0.)
 			{
-                            fw -= s;
-                            s /= 10.;
+                fw -= s;
+                s /= 10.;
 			}
 		}
 	}
@@ -385,15 +385,15 @@ double pf(double q, int n1, int n2)
 
 /* F-distribution interface */
 static double fdist(n1, n2, f)
-     int n1, n2;
-     double f;
+    int n1, n2;
+double f;
 {
     return 1.0 - q_f(n1, n2, f);
 }
 
 static double pfdist(n1, n2, y)
-     int n1, n2;
-     double y;
+    int n1, n2;
+double y;
 {
     return pf(1.0 - y, n1, n2);
 }
@@ -401,7 +401,7 @@ static double pfdist(n1, n2, y)
 
 /* discrete distributions */
 static int perm(n, x)
-     int n, x;
+    int n, x;
 {
     int r = 1;
     if (n < 0 || x < 0) rb_raise(rb_eRangeError, "parameters should be positive");
@@ -414,7 +414,7 @@ static int perm(n, x)
 }
   
 static int combi(n, x)
-     int n, x;
+    int n, x;
 {
     if (n < 0 || x < 0) rb_raise(rb_eRangeError, "parameters should be positive");
     if (x*2 > n) x = n - x;
@@ -422,16 +422,16 @@ static int combi(n, x)
 }
 
 static float bindens(n, p, x)
-     int n, x;
-     float p;
+    int n, x;
+float p;
 {
     float q = 1.0 - p;
     return combi(n, x) * pow(p, x) * pow(q, n - x);
 }
   
 static float bindist(n, p, x)
-     int n, x;
-     float p;
+    int n, x;
+float p;
 {
     float s = 0.0;
     int k;
@@ -442,16 +442,16 @@ static float bindist(n, p, x)
 }
 
 static float poissondens(m, x)
-     float m;
-     int x;
+    float m;
+int x;
 {
     if (x < 0) return 0.0 ;
     return pow(m, x) * exp(-m) / perm(x, x);
 }
 
 static float poissondist(m, x)
-     float m;
-     int x;
+    float m;
+int x;
 {
     float s = 0.0;
     int k;
@@ -463,35 +463,35 @@ static float poissondist(m, x)
 
 /* normal-distribution */
 static VALUE rb_normaldist(mod, x)
-     VALUE mod, x;
+    VALUE mod, x;
 {
     Need_Float(x);
     return rb_float_new(normaldist(RFLOAT(x)->value));
 }
 
 static VALUE rb_normalxXX_(mod, x)
-     VALUE mod, x;
+    VALUE mod, x;
 {
     Need_Float(x);
     return rb_float_new(normaldist(RFLOAT(x)->value));
 }
 
 static VALUE rb_normal__X_(mod, x)
-     VALUE mod, x;
+    VALUE mod, x;
 {
     Need_Float(x);
     return rb_float_new(normaldist(RFLOAT(x)->value) - 0.5);
 }
 
 static VALUE rb_normal___x(mod, x)
-     VALUE mod, x;
+    VALUE mod, x;
 {
     Need_Float(x);
     return rb_float_new(1.0 - normaldist(RFLOAT(x)->value));
 }
 
 static VALUE rb_normalx__x(mod, x)
-     VALUE mod, x;
+    VALUE mod, x;
 {
     Need_Float(x);
     return rb_float_new(2.0 - normaldist(RFLOAT(x)->value) * 2.0);
@@ -499,35 +499,35 @@ static VALUE rb_normalx__x(mod, x)
 
 /* inverse of normal-distribution */
 static VALUE rb_pnormaldist(mod, x)
-     VALUE mod, x;
+    VALUE mod, x;
 {
     Need_Float(x);
     return rb_float_new(pnormaldist(RFLOAT(x)->value));
 }
 
 static VALUE rb_pnormalxXX_(mod, x)
-     VALUE mod, x;
+    VALUE mod, x;
 {
     Need_Float(x);
     return rb_float_new(pnormaldist(RFLOAT(x)->value));
 }
 
 static VALUE rb_pnormal__X_(mod, x)
-     VALUE mod, x;
+    VALUE mod, x;
 {
     Need_Float(x);
     return rb_float_new(pnormaldist(RFLOAT(x)->value + 0.5));
 }
 
 static VALUE rb_pnormal___x(mod, x)
-     VALUE mod, x;
+    VALUE mod, x;
 {
     Need_Float(x);
     return rb_float_new(pnormaldist(1.0 - RFLOAT(x)->value));
 }
 
 static VALUE rb_pnormalx__x(mod, x)
-     VALUE mod, x;
+    VALUE mod, x;
 {
     Need_Float(x);
     return rb_float_new(pnormaldist(1.0 - (RFLOAT(x)->value)/2.0));
@@ -536,28 +536,28 @@ static VALUE rb_pnormalx__x(mod, x)
 
 /* chi-square-distribution */
 static VALUE rb_chi2_x(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(1.0 - chi2dist(FIX2INT(n), RFLOAT(x)->value));
 }
 
 static VALUE rb_pchi2_x(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(pchi2dist(FIX2INT(n), 1.0 - (RFLOAT(x)->value)));
 }
 
 static VALUE rb_chi2X_(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(chi2dist(FIX2INT(n), RFLOAT(x)->value));
 }
 
 static VALUE rb_pchi2X_(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(pchi2dist(FIX2INT(n), RFLOAT(x)->value));
@@ -566,14 +566,14 @@ static VALUE rb_pchi2X_(mod, n, x)
 
 /* inverse of chi-square-distribution */
 static VALUE rb_chi2dist(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(1.0 - (q_chi2(FIX2INT(n), RFLOAT(x)->value)));
 }
 
 static VALUE rb_pchi2dist(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(pchi2(1.0 - (RFLOAT(x)->value), FIX2INT(n)));
@@ -582,35 +582,35 @@ static VALUE rb_pchi2dist(mod, n, x)
 
 /* t-distribution */
 static VALUE rb_tdist(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(tdist(FIX2INT(n), RFLOAT(x)->value));
 }
 
 static VALUE rb_tx__x(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(2.0 - tdist(FIX2INT(n), RFLOAT(x)->value)*2.0);
 }
 
 static VALUE rb_txXX_(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(tdist(FIX2INT(n), RFLOAT(x)->value));
 }
 
 static VALUE rb_t__X_(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(tdist(FIX2INT(n), RFLOAT(x)->value) - 0.5);
 }
 
 static VALUE rb_t___x(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(1.0 - tdist(FIX2INT(n), RFLOAT(x)->value));
@@ -618,35 +618,35 @@ static VALUE rb_t___x(mod, n, x)
 
 /* inverse of t-distribution */
 static VALUE rb_ptdist(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(ptdist(FIX2INT(n), RFLOAT(x)->value));
 }
 
 static VALUE rb_ptx__x(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(ptdist(FIX2INT(n), 1.0 - (RFLOAT(x)->value)/2.0));
 }
 
 static VALUE rb_ptxXX_(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(ptdist(FIX2INT(n), RFLOAT(x)->value));
 }
 
 static VALUE rb_pt__X_(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(ptdist(FIX2INT(n), 0.5 + (RFLOAT(x)->value)));
 }
 
 static VALUE rb_pt___x(mod, n, x)
-     VALUE mod, n, x;
+    VALUE mod, n, x;
 {
     Need_Float(x);
     return rb_float_new(ptdist(FIX2INT(n), 1.0 - (RFLOAT(x)->value)));
@@ -654,7 +654,7 @@ static VALUE rb_pt___x(mod, n, x)
 
 /* F-distribution */
 static VALUE rb_fdist(mod, n1, n2, x)
-     VALUE mod, n1, n2, x;
+    VALUE mod, n1, n2, x;
 {
     Need_Float(x);
     return rb_float_new(fdist(FIX2INT(n1), FIX2INT(n2), RFLOAT(x)->value));
@@ -662,14 +662,14 @@ static VALUE rb_fdist(mod, n1, n2, x)
 
 
 static VALUE rb_f_x(mod, n1, n2, x)
-     VALUE mod, n1, n2, x;
+    VALUE mod, n1, n2, x;
 {
     Need_Float(x);
     return rb_float_new(1.0 - fdist(FIX2INT(n1), FIX2INT(n2), RFLOAT(x)->value));
 }
 
 static VALUE rb_fX_(mod, n1, n2, x)
-     VALUE mod, n1, n2, x;
+    VALUE mod, n1, n2, x;
 {
     Need_Float(x);
     return rb_float_new(fdist(FIX2INT(n1), FIX2INT(n2), RFLOAT(x)->value));
@@ -677,21 +677,21 @@ static VALUE rb_fX_(mod, n1, n2, x)
 
 /* inverse of F-distribution */
 static VALUE rb_pfdist(mod, n1, n2, x)
-     VALUE mod, n1, n2, x;
+    VALUE mod, n1, n2, x;
 {
     Need_Float(x);
     return rb_float_new(pfdist(FIX2INT(n1), FIX2INT(n2), RFLOAT(x)->value));
 }
 
 static VALUE rb_pf_x(mod, n1, n2, x)
-     VALUE mod, n1, n2, x;
+    VALUE mod, n1, n2, x;
 {
     Need_Float(x);
     return rb_float_new(pfdist(FIX2INT(n1), FIX2INT(n2), 1.0 - (RFLOAT(x)->value)));
 }
 
 static VALUE rb_pfX_(mod, n1, n2, x)
-     VALUE mod, n1, n2, x;
+    VALUE mod, n1, n2, x;
 {
     Need_Float(x);
     return rb_float_new(pfdist(FIX2INT(n1), FIX2INT(n2), RFLOAT(x)->value));
@@ -700,61 +700,61 @@ static VALUE rb_pfX_(mod, n1, n2, x)
 /* discrete distributions */
 
 static VALUE rb_bindens(mod, n, p, x)
-     VALUE n, p, x;
+    VALUE n, p, x;
 {
     Need_Float(p);
     return rb_float_new(bindens(FIX2INT(n), RFLOAT(p)->value, FIX2INT(x)));
 }
 
 static VALUE rb_bindist(mod, n, p, x)
-     VALUE n, p, x;
+    VALUE n, p, x;
 {
     Need_Float(p);
     return rb_float_new(bindist(FIX2INT(n), RFLOAT(p)->value, FIX2INT(x)));
 }
 
 static VALUE rb_binX_(mod, n, p, x)
-     VALUE n, p, x;
+    VALUE n, p, x;
 {
     Need_Float(p);
     return rb_float_new(bindist(FIX2INT(n), RFLOAT(p)->value, FIX2INT(x)));
 }
 
 static VALUE rb_bin_x(mod, n, p, x)
-     VALUE n, p, x;
+    VALUE n, p, x;
 {
     Need_Float(p);
     return rb_float_new(bindist(FIX2INT(n), 1.0 - (RFLOAT(p)->value), FIX2INT(n) - FIX2INT(x)));
 }
 
 static VALUE rb_poissondens(mod, m, x)
-     VALUE m, x;
+    VALUE m, x;
 {
     Need_Float(m);
     return rb_float_new(poissondens(RFLOAT(m)->value, FIX2INT(x)));
 }
 
 static VALUE rb_poissondist(mod, m, x)
-     VALUE m, x;
+    VALUE m, x;
 {
     Need_Float(m);
     return rb_float_new(poissondist(RFLOAT(m)->value, FIX2INT(x)));
 }
 
 static VALUE rb_poissonX_(mod, m, x)
-     VALUE m, x;
+    VALUE m, x;
 {
     Need_Float(m);
     return rb_float_new(poissondist(RFLOAT(m)->value, FIX2INT(x)));
 }
 
 /*
-static VALUE rb_poisson_x(mod, m, x)
-     VALUE m, x;
-{
-    Need_Float(m);
-    return rb_float_new(1.0 - poissondist((RFLOAT(m)->value), FIX2INT(x) - 1));
-}
+  static VALUE rb_poisson_x(mod, m, x)
+  VALUE m, x;
+  {
+  Need_Float(m);
+  return rb_float_new(1.0 - poissondist((RFLOAT(m)->value), FIX2INT(x) - 1));
+  }
 */
 
 /* ruby interface */
