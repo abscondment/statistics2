@@ -1,7 +1,7 @@
 require "mkmf"
 create_makefile("statistics2")
 open("Makefile", "a") do |f|
-  f << "test:\n\truby -I./lib:. t.rb\n"
+  f << "test:\n\truby -I./lib:. c_tests.rb\n"
   f << "\n"
   f << "uninstall:\n"
   f << "\t@echo rm $(RUBYLIBDIR)/statistics2.rb\n"
