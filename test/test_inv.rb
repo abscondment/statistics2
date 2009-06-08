@@ -1,13 +1,13 @@
-if $0 == __FILE__
-  require 'test/unit'
-  $test = true
-  require 'sample-tbl'
-  require 'statistics2.rb'
-end
+$:.unshift File.dirname(__FILE__)
+$test = true
+
+require 'test/unit' unless defined?(Hoe)
+require 'sample-tbl'
+require 'lib/statistics2'
 
 class T_Statistics2 < Test::Unit::TestCase
   $mod = Statistics2
-
+  
   def inv(s); "p" + s; end
 
   def test_inv_normal

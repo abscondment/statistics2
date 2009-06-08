@@ -48,7 +48,7 @@ def chi2_tbl(ln = nil, tn = nil)
              when 1; a >= 0.95 ? " %.4e" : " %6.3f"
              when 2..5; a >= 0.95 ? "  %7.5f" : "  %7.3f"
              when 6..24; "  %7.3f"
-             else 26..100; "  %7.2f"
+             else; "  %7.2f" # 26..100
              end
       _printf(form, yield(n, a))
     end

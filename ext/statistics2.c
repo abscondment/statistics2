@@ -116,6 +116,7 @@ static double q_chi2(int df, double chi2)
 }
 
 /* inverse of chi-square distribution */
+/*
 static double chi2dens(n, x)
     int n;
 double x;
@@ -123,7 +124,7 @@ double x;
     double n2 = ((double) n)/2.0;
     return 1.0 / pow(2, n2) / gamma(n2) * pow(x,(n2 - 1.0)) * exp(-x/2.0);
 }
-
+*/
 /*
   static double newton_chi(n, y, ini)
   int n;
@@ -762,8 +763,29 @@ static VALUE rb_poissonX_(mod, m, x)
 void
 Init_statistics2(void)
 {
-    rb_mStatistics2 = rb_define_module("Statistics2");
+    int i;
+    char *checkMethods[] = { "normaldist", "normalxXX_", "normal__X_", "normal___x", "normalx__x",
+                             "pnormaldist", "pnormalxXX_", "pnormal__X_", "pnormal___x", "pnormalx__x",
+                             "chi2dist", "chi2X_", "chi2_x", "pchi2dist", "pchi2X_", "pchi2_x",
+                             "tdist", "txXX_", "t__X_", "t___x", "tx__x", "ptdist", "ptxXX_", "pt__X_", "pt___x", "ptx__x",
+                             "fdist", "fX_", "f_x", "pfdist", "pfX_", "pf_x",
+                             "bindens", "bindist", "binX_", "bin_x",
+                             "poissondens", "poissondist", "poissonX_", "poisson_x" };
+    VALUE methodDefined = rb_intern("private_method_defined?"),
+          removeMethod  = rb_intern("remove_method");
+    
 
+    rb_mStatistics2 = rb_define_module("Statistics2");    
+    /* Remove any preexisting methods before adding the new ones */
+    for (i = 0; i < (sizeof(checkMethods) / sizeof(checkMethods[0])); i++) {
+        if (RTEST(rb_funcall(rb_mStatistics2, methodDefined, 1, rb_str_new2(checkMethods[i])))) {
+            /* Remove instance method */
+            rb_funcall(rb_mStatistics2, removeMethod, 1, rb_str_new2(checkMethods[i]));
+            /* Remove the singleton method */
+            rb_funcall(rb_singleton_class(rb_mStatistics2), removeMethod, 1, rb_str_new2(checkMethods[i]));
+        }
+    }
+    
     rb_define_module_function(rb_mStatistics2, "normaldist", rb_normaldist, 1);
     rb_define_module_function(rb_mStatistics2, "normalxXX_", rb_normalxXX_ , 1);
     rb_define_module_function(rb_mStatistics2, "normal__X_", rb_normal__X_, 1);

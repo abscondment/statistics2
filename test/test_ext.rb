@@ -1,14 +1,19 @@
-require 'test/unit'
+$:.unshift File.dirname(__FILE__)
+$:.unshift File.join(File.dirname(__FILE__), '..', 'ext')
+
 $test = true
 
-$LOAD_PATH.unshift ".."
+require 'test/unit' unless defined?(Hoe)
+require 'benchmark'
 require 'sample-tbl'
-
-eval(File.read('../statistics2.rb').sub(/\bStatistics2\b/, 'Statistics20'))
-$mod0 = Statistics20
 
 require 'statistics2.so'
 $mod = Statistics2
+
+
+eval(File.read('lib/statistics2.rb').sub(/\bStatistics2\b/, 'Statistics20'))
+$mod0 = Statistics20
+
 
 class T_Statistics2 < Test::Unit::TestCase
 
@@ -41,6 +46,5 @@ class T_Statistics2 < Test::Unit::TestCase
       end
     end
   end
+  
 end
-
-require "t-inv.rb"
