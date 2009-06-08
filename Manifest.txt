@@ -1,0 +1,12 @@
+History.markdown
+Manifest.txt
+README.markdown
+Rakefile
+ext/extconf.rb
+ext/show.rb
+ext/statistics2.c
+lib/statistics2.rb
+mklist.rb
+test/sample-tbl.rb
+test/test_ext.rb
+test/test_inv.rb

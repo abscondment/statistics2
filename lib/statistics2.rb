@@ -1,9 +1,10 @@
-#   statistics2.rb
-#
+$:.unshift File.dirname(__FILE__)
+$:.unshift File.join(File.dirname(__FILE__), '..', 'ext')
+
+require 'statistics2/version'
+
 #   distributions of statistics             
 #     by Shin-ichiro HARA
-#
-#   2003.09.25
 #
 #   Ref:
 #     [1] http://www.matsusaka-u.ac.jp/~okumura/algo/
