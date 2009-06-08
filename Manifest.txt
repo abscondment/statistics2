@@ -1,12 +1,14 @@
-History.markdown
+History.rdoc
 Manifest.txt
-README.markdown
+README.rdoc
 Rakefile
 ext/extconf.rb
 ext/show.rb
 ext/statistics2.c
 lib/statistics2.rb
+lib/statistics2/version.rb
 mklist.rb
+statistics2.gemspec
 test/sample-tbl.rb
 test/test_ext.rb
 test/test_inv.rb

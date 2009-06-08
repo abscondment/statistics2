@@ -9,8 +9,8 @@ Hoe.spec 'statistics2' do
   developer 'Shin-ichiro Hara', 'sinara@blade.nagaokaut.ac.jp'
   
   self.version      = Statistics2::VERSION
-  self.readme_file  = 'README.markdown'
-  self.history_file = 'History.markdown'
+  self.readme_file  = 'README.rdoc'
+  self.history_file = 'History.rdoc'
   self.url          = 'http://github.com/abscondment/statistics2'
   
   # C extension goodness
