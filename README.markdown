@@ -1,29 +1,29 @@
-= Statistics2 -- Statistical Distributions for Ruby
+ = Statistics2 -- Statistical Distributions for Ruby
 
-Authors: Shin-ichiro HARA(sinara@blade.nagaokaut.ac.jp), Brendan Ribera (brendan.ribera@gmail.com)
+ Authors: Shin-ichiro HARA(sinara@blade.nagaokaut.ac.jp), Brendan Ribera (brendan.ribera@gmail.com)
 
-== REQUIREMENTS:
+ == REQUIREMENTS:
  
-* ruby-1.8
+ * ruby-1.8
 
-== INSTALL:
+ == INSTALL:
 
-* TODO
+ * TODO
 
-=== Installation of extension module (if you need):
+ === Installation of extension module (if you need):
  
-This package also contains the C extension module which has the same functions in `statistics2.rb'. Enter ext/ directory of the package. Then type:
+ This package also contains the C extension module which has the same functions in `statistics2.rb'. Enter ext/ directory of the package. Then type:
     $ ruby extconf.rb
     $ make
     $ make test
     $ make install
 
-== USAGE:
+ == USAGE:
  
-* Example:
+ * Example:
     require "statistics2"
     puts Statistics2.normaldist(0.27) #=> 0.606419873198039
 
-== LICENSE:
+ == LICENSE:
  
-Ruby's (see http://www.ruby-lang.org/en/LICENSE.txt)
+ Ruby's (see http://www.ruby-lang.org/en/LICENSE.txt)
