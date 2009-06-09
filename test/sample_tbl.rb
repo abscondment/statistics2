@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+$test ||= false
 if $test
   def nop(*a); ""; end
   alias _sprintf nop
@@ -124,6 +124,11 @@ if $0 == __FILE__
     puts "      #$0 f 0.01"
     exit
   end
-  require "statistics2"
+  
+  $:.unshift File.dirname(__FILE__)
+  $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+  $:.unshift File.join(File.dirname(__FILE__), '..', 'ext')
+
+  require 'statistics2'
   show_tbl(Statistics2, *ARGV)
 end

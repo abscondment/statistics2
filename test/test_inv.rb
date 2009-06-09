@@ -2,7 +2,7 @@ $:.unshift File.dirname(__FILE__)
 $test = true
 
 require 'test/unit' unless defined?(Hoe)
-require 'sample-tbl'
+require 'sample_tbl'
 require 'lib/statistics2'
 
 class T_Statistics2 < Test::Unit::TestCase

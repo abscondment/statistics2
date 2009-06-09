@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email = ["brendan.ribera@gmail.com", "sinara@blade.nagaokaut.ac.jp"]
   s.extensions = ["ext/extconf.rb"]
   s.extra_rdoc_files = ["Manifest.txt"]
-  s.files = ["History.rdoc", "Manifest.txt", "README.rdoc", "Rakefile", "ext/extconf.rb", "ext/show.rb", "ext/statistics2.c", "lib/statistics2.rb", "lib/statistics2/version.rb", "mklist.rb", "statistics2.gemspec", "test/sample-tbl.rb", "test/test_ext.rb", "test/test_inv.rb"]
+  s.files = ["History.rdoc", "Manifest.txt", "README.rdoc", "Rakefile", "examples/mklist.rb", "examples/show.rb", "ext/extconf.rb", "ext/statistics2.c", "lib/statistics2.rb", "lib/statistics2/version.rb", "statistics2.gemspec", "test/sample_tbl.rb", "test/test_ext.rb", "test/test_inv.rb"]
   s.homepage = %q{http://github.com/abscondment/statistics2}
   s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib", "ext"]

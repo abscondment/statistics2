@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
-require "statistics2.so"
+$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+require "statistics2"
 if $0 == __FILE__
   if ARGV.empty?
     puts "Example:"
