@@ -7,6 +7,7 @@ examples/show.rb
 ext/extconf.rb
 ext/statistics2.c
 lib/statistics2.rb
+lib/statistics2/no_ext.rb
 lib/statistics2/version.rb
 statistics2.gemspec
 test/sample_tbl.rb

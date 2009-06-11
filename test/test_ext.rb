@@ -4,7 +4,6 @@ $:.unshift File.join(File.dirname(__FILE__), '..', 'ext')
 $test = true
 
 require 'test/unit' unless defined?(Hoe)
-require 'benchmark'
 require 'sample_tbl'
 
 require 'statistics2.so'

@@ -6,12 +6,12 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brendan Ribera", "Shin-ichiro Hara"]
-  s.date = %q{2009-06-08}
+  s.date = %q{2009-06-10}
   s.description = %q{}
   s.email = ["brendan.ribera@gmail.com", "sinara@blade.nagaokaut.ac.jp"]
   s.extensions = ["ext/extconf.rb"]
   s.extra_rdoc_files = ["Manifest.txt"]
-  s.files = ["History.rdoc", "Manifest.txt", "README.rdoc", "Rakefile", "examples/mklist.rb", "examples/show.rb", "ext/extconf.rb", "ext/statistics2.c", "lib/statistics2.rb", "lib/statistics2/version.rb", "statistics2.gemspec", "test/sample_tbl.rb", "test/test_ext.rb", "test/test_inv.rb"]
+  s.files = ["History.rdoc", "Manifest.txt", "README.rdoc", "Rakefile", "examples/mklist.rb", "examples/show.rb", "ext/extconf.rb", "ext/statistics2.c", "lib/statistics2.rb", "lib/statistics2/no_ext.rb", "lib/statistics2/version.rb", "statistics2.gemspec", "test/sample_tbl.rb", "test/test_ext.rb", "test/test_inv.rb"]
   s.homepage = %q{http://github.com/abscondment/statistics2}
   s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib", "ext"]

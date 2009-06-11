@@ -13,6 +13,23 @@ require 'statistics2/version'
 module Statistics2
   SQ2PI = Math.sqrt(2 * Math::PI)
 
+  # Easy access to our singleton
+  def self.metaclass; class << self; self; end; end
+
+  # Remove existing methods.
+  ["normaldist", "normalxXX_", "normal__X_", "normal___x", "normalx__x",
+   "pnormaldist", "pnormalxXX_", "pnormal__X_", "pnormal___x", "pnormalx__x",
+   "chi2dist", "chi2X_", "chi2_x", "pchi2dist", "pchi2X_", "pchi2_x",
+   "tdist", "txXX_", "t__X_", "t___x", "tx__x", "ptdist", "ptxXX_", "pt__X_", "pt___x", "ptx__x",
+   "fdist", "fX_", "f_x", "pfdist", "pfX_", "pf_x",
+   "bindens", "bindist", "binX_", "bin_x",
+   "poissondens", "poissondist", "poissonX_", "poisson_x"].each do |m|
+    undef_method(m) if self.private_method_defined?(m)
+    self.metaclass.instance_eval do
+      undef_method(m) if self.method_defined?(m)
+    end
+  end
+  
   # Newton approximation
   def newton_a(y, ini, epsilon = 1.0e-6, limit = 30)
     x = ini
@@ -519,6 +536,10 @@ module Statistics2
   module_function :poissondens, :poissondist, :poissonX_, :poisson_x
 end
 
+if !defined?(Statistics2::NO_EXT) || Statistics2::NO_EXT != true
+  puts 'loading extension...'
+  require 'statistics2.so'
+end
 
 if $0 == __FILE__
   if ARGV.empty?
