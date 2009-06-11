@@ -150,11 +150,12 @@ module Statistics2
   module_function :p_nor, :pnorm
   private_class_method :p_nor, :pnorm
 
-  #normal-distribution interface
+  # Returns the integral of normal distribution over (-Infty, x].
   def normaldist(z)
     p_nor(z)
   end
 
+  # Returns the P-value of normaldist(x).
   def pnormaldist(y)
     pnorm(y)
   end
@@ -228,8 +229,10 @@ module Statistics2
   module_function :q_chi2, :pchi2, :chi2dens
   private_class_method :q_chi2, :pchi2, :chi2dens
   
-  # chi-square-distribution interface
+  # Returns the integral of Chi-squared distribution with n degrees of freedom over [0, x].
   def chi2dist(n, x); 1.0 - q_chi2(n, x); end
+  
+  # Returns the P-value of chi2dist().
   def pchi2dist(n, y); pchi2(n, 1.0 - y); end
 
 
@@ -314,8 +317,10 @@ module Statistics2
   module_function :p_t, :pt, :ptsub
   private_class_method :p_t, :pt, :ptsub
 
-  # t-distribution interface
+  # Returns the integral of t-distribution with n degrees of freedom over (-Infty, x].
   def tdist(n, t); p_t(n, t); end
+  
+  # Returns the P-value of tdist().
   def ptdist(n, y)
     if y > 0.5
       pt(2.0 - y*2.0, n)
@@ -422,8 +427,10 @@ module Statistics2
   module_function :q_f, :pf, :pfsub
   private_class_method :q_f, :pf, :pfsub
 
-  # F-distribution interface
+  # Returns the integral of F-distribution with n1 and n2 degrees of freedom over [0, x].
   def fdist(n1, n2, f); 1.0 - q_f(n1, n2, f); end
+
+  # Returns the P-value of fdist().
   def pfdist(n1, n2, y); pf(1.0 - y, n1, n2); end
 
   ############################################################################
@@ -474,58 +481,117 @@ module Statistics2
   end
 
   ############################################################################
-
   # normal-distribution
+  
+  # Returns the integral of normal distribution over (-Infty, x].
   def normalxXX_(z); normaldist(z); end
+  
+  # Returns the integral of normal distribution over [0, x].
   def normal__X_(z); normaldist(z) - 0.5; end
+  
+  # Returns the integral of normal distribution over [x, Infty).
   def normal___x(z); 1.0 - normaldist(z); end
+
+  # Returns the integral of normal distribution over (-Infty, -x] + [x, Infty).
   def normalx__x(z); 2.0 - normaldist(z) * 2.0; end
+  
   module_function :normaldist, :normalxXX_, :normal__X_, :normal___x, :normalx__x
 
+  
   # inverse of normal-distribution
+
+  # Return the P-value of the corresponding integral.
   def pnormalxXX_(z); pnormaldist(z); end
+  
+  # Return the P-value of the corresponding integral.
   def pnormal__X_(y); pnormalxXX_(y + 0.5); end
+  
+  # Return the P-value of the corresponding integral.
   def pnormal___x(y); pnormalxXX_(1.0 - y); end
+  
+  # Return the P-value of the corresponding integral.
   def pnormalx__x(y); pnormalxXX_(1.0 - y/2.0); end
+  
   module_function :pnormaldist, :pnormalxXX_, :pnormal__X_, :pnormal___x, :pnormalx__x
 
 
   # chi2-distribution
+  
+  # Returns the integral of Chi-squared distribution with n degrees of freedom over [x, Infty).
   def chi2_x(n, x); 1.0 - chi2dist(n, x); end
+  
+  # Returns the integral of Chi-squared distribution with n degrees of freedom over [0, x].
   def chi2X_(n, x); chi2dist(n, x); end
+  
   module_function :chi2dist, :chi2X_, :chi2_x
 
+  
   # inverse of chi2-distribution
+
+  # Return the P-value of the corresponding integral.
   def pchi2_x(n, y); pchi2dist(n, 1.0 - y); end
+  
+  # Return the P-value of the corresponding integral.
   def pchi2X_(n, y); pchi2dist(n, y); end
+  
   module_function :pchi2dist, :pchi2X_, :pchi2_x
 
 
   # t-distribution
+
+  # Returns the integral of normal distribution with n degrees of freedom over (-Infty, -x] + [x, Infty).
   def tx__x(n, x); 2.0 - tdist(n, x) * 2.0; end
+  
+  # Returns the integral of t-distribution with n degrees of freedom over (-Infty, x].
   def txXX_(n, x); tdist(n, x); end
+  
+  # Returns the integral of t-distribution with n degrees of freedom over [0, x].
   def t__X_(n, x); tdist(n, x) - 0.5; end
+
+  # Returns the integral of t-distribution with n degrees of freedom over [x, Infty).
   def t___x(n, x); 1.0 - tdist(n, x); end
+  
   module_function :tdist, :txXX_, :t__X_, :t___x, :tx__x
 
+  
   # inverse of t-distribution
+
+  # Return the P-value of the corresponding integral.
   def ptx__x(n, y); ptdist(n, 1.0 - y / 2.0); end
+
+  # Return the P-value of the corresponding integral.
   def ptxXX_(n, y); ptdist(n, y); end
+
+  # Return the P-value of the corresponding integral.
   def pt__X_(n, y); ptdist(n, 0.5 + y); end
+
+  # Return the P-value of the corresponding integral.
   def pt___x(n, y); ptdist(n, 1.0 - y); end
+  
   module_function :ptdist, :ptxXX_, :pt__X_, :pt___x, :ptx__x
 
 
   # F-distribution
+
+  # Returns the integral of F-distribution with n1 and n2 degrees of freedom over [x, Infty).
   def f_x(n1, n2, x); 1.0 - fdist(n1, n2, x); end
+
+  # Returns the integral of F-distribution with n1 and n2 degrees of freedom over [0, x].
   def fX_(n1, n2, x); fdist(n1, n2, x); end
   module_function :fdist, :fX_, :f_x
 
+  
   # inverse of F-distribution
+
+  # Return the P-value of the corresponding integral.
   def pf_x(n1, n2, x); pfdist(n1, n2, 1.0 - x); end
+
+  # Return the P-value of the corresponding integral.
   def pfX_(n1, n2, x); pfdist(n1, n2, x); end
+  
   module_function :pfdist, :pfX_, :pf_x
 
+  
   # discrete distributions
   def binX_(n, p, x); bindist(n, p, x); end
   def bin_x(n, p, x); bindist(n, 1.0 - p, n - x);  end
