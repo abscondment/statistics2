@@ -18,12 +18,11 @@ Authors: Shin-ichiro HARA(sinara@blade.nagaokaut.ac.jp), Brendan Ribera (brendan
  
 * Example:
     require "statistics2"
-    puts Statistics2.normaldist(0.27) #=> 0.606419873198039
+    puts Statistics2.normaldist(0.27) #=> 0.60641987319804
 
 * If you don't want to use the C extension:
     require "statistics2/no_ext"
-    puts Statistics2.normaldist(0.27) #=> 0.606419873198039
-
+    puts Statistics2.normaldist(0.27) #=> 0.606419873198039 (delta of 9.99200722162641e-16)
     
 == LICENSE:
  
