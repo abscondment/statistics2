@@ -536,8 +536,7 @@ module Statistics2
   module_function :poissondens, :poissondist, :poissonX_, :poisson_x
 end
 
-if !defined?(Statistics2::NO_EXT) || Statistics2::NO_EXT != true
-  puts 'loading extension...'
+if !defined?(Statistics2::NO_EXT) || !Statistics2::NO_EXT
   require 'statistics2.so'
 end
 
