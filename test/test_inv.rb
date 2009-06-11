@@ -1,4 +1,7 @@
 $:.unshift File.dirname(__FILE__)
+$:.unshift File.join(File.dirname(__FILE__), '..', 'ext')
+$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+
 $test = true
 
 require 'test/unit' unless defined?(Hoe)

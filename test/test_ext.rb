@@ -11,9 +11,12 @@ require 'statistics2.so'
 $mod = Statistics2
 
 
-eval(File.read('lib/statistics2.rb').sub(/\bStatistics2\b/, 'Statistics20'))
+# Request extension to be skipped.
+module Statistics20
+  NO_EXT = true
+end
+eval(File.read('lib/statistics2.rb').gsub(/Statistics2/, 'Statistics20'))
 $mod0 = Statistics20
-
 
 class T_Statistics2 < Test::Unit::TestCase
 
