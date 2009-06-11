@@ -15,6 +15,10 @@
 #include <math.h>
 #include <errno.h>
 
+#ifndef RFLOAT_VALUE
+#define RFLOAT_VALUE(v) (RFLOAT(v)->double_value) 
+#endif
+
 #define PI 3.14159265358979324
 #define Need_Float(x) (x) = rb_Float(x)
 
