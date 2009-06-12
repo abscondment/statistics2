@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brendan Ribera", "Shin-ichiro Hara"]
-  s.date = %q{2009-06-10}
+  s.date = %q{2009-06-11}
   s.description = %q{}
   s.email = ["brendan.ribera@gmail.com", "sinara@blade.nagaokaut.ac.jp"]
   s.extensions = ["ext/extconf.rb"]
@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = %q{statistics2}
   s.rubygems_version = %q{1.3.4}
   s.summary = %q{}
-  s.test_files = ["test/test_inv.rb", "test/test_ext.rb"]
+  s.test_files = ["test/test_ext.rb", "test/test_inv.rb"]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
