@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brendan Ribera", "Shin-ichiro Hara"]
-  s.date = %q{2009-06-11}
-  s.description = %q{}
+  s.date = %q{2010-01-26}
+  s.description = %q{Statistics2 is a module that provides normal, Chi-square, t- and F- probability distributions for Ruby. It is a fork/continuation of Shin-ichiro Hara's original code. It provides a native, compiled extension and a pure Ruby implementation.}
   s.email = ["brendan.ribera@gmail.com", "sinara@blade.nagaokaut.ac.jp"]
   s.extensions = ["ext/extconf.rb"]
   s.extra_rdoc_files = ["Manifest.txt"]
@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib", "ext"]
   s.rubyforge_project = %q{statistics2}
-  s.rubygems_version = %q{1.3.4}
-  s.summary = %q{}
+  s.rubygems_version = %q{1.3.5}
+  s.summary = %q{Statistical Distributions for Ruby. Based on Shin-ichiro Hara's original library, updated for Ruby 1.9}
   s.test_files = ["test/test_ext.rb", "test/test_inv.rb"]
 
   if s.respond_to? :specification_version then
@@ -25,11 +25,11 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<hoe>, [">= 2.0.0"])
+      s.add_development_dependency(%q<hoe>, [">= 2.4.0"])
     else
-      s.add_dependency(%q<hoe>, [">= 2.0.0"])
+      s.add_dependency(%q<hoe>, [">= 2.4.0"])
     end
   else
-    s.add_dependency(%q<hoe>, [">= 2.0.0"])
+    s.add_dependency(%q<hoe>, [">= 2.4.0"])
   end
 end

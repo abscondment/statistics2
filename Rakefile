@@ -12,7 +12,8 @@ Hoe.spec 'statistics2' do
   self.readme_file  = 'README.rdoc'
   self.history_file = 'History.rdoc'
   self.url          = 'http://github.com/abscondment/statistics2'
-  
+  self.summary      = 'Statistical Distributions for Ruby. Based on Shin-ichiro Hara\'s original library, updated for Ruby 1.9'
+  self.description  = 'Statistics2 is a module that provides normal, Chi-square, t- and F- probability distributions for Ruby. It is a fork/continuation of Shin-ichiro Hara\'s original code. It provides a native, compiled extension and a pure Ruby implementation.'
   # C extension goodness
   self.spec_extras[:extensions] = "ext/extconf.rb"
   self.clean_globs << EXT << 'ext/*.o' << 'ext/Makefile'

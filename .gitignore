@@ -2,3 +2,5 @@ examples/*.tbl
 ext/*.o
 ext/*.so
 ext/Makefile
+doc
+pkg
