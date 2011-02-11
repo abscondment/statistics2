@@ -2,7 +2,7 @@ require 'rubygems'
 require 'hoe'
 require './lib/statistics2/version'
 
-EXT = "ext/statistics2.so"
+EXT = "ext/statistics2/statistics2.so"
 
 Hoe.spec 'statistics2' do
   developer 'Brendan Ribera', 'brendan.ribera@gmail.com'
@@ -23,8 +23,8 @@ desc "Compile extensions"
 task :compile => EXT
 task :test => :compile
 
-file EXT => ['ext/extconf.rb', 'ext/statistics2.c'] do
-  Dir.chdir 'ext' do
+file EXT => ['ext/statistics2/extconf.rb', 'ext/statistics2/statistics2.c'] do
+  Dir.chdir 'ext/statistics2' do
     ruby 'extconf.rb'
     sh 'make'
   end
