@@ -15,12 +15,6 @@
 #include <math.h>
 #include <errno.h>
 
-#ifndef RUBY_19
-#ifndef RFLOAT_VALUE
-#define RFLOAT_VALUE(v) (RFLOAT(v)->value)
-#endif
-#endif
-
 #define PI 3.14159265358979324
 #define Need_Float(x) (x) = rb_Float(x)
 
