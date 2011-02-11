@@ -763,7 +763,7 @@ static VALUE rb_poissonX_(mod, m, x)
 void
 Init_statistics2(void)
 {
-    int i;
+    uint i;
     const char *checkMethods[] = { "normaldist", "normalxXX_", "normal__X_", "normal___x", "normalx__x",
                                    "pnormaldist", "pnormalxXX_", "pnormal__X_", "pnormal___x", "pnormalx__x",
                                    "chi2dist", "chi2X_", "chi2_x", "pchi2dist", "pchi2X_", "pchi2_x",
