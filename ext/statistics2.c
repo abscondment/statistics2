@@ -701,49 +701,49 @@ static VALUE rb_pfX_(mod, n1, n2, x)
 /* discrete distributions */
 
 static VALUE rb_bindens(mod, n, p, x)
-    VALUE n, p, x;
+    VALUE mod, n, p, x;
 {
     Need_Float(p);
     return rb_float_new(bindens(FIX2INT(n), RFLOAT_VALUE(p), FIX2INT(x)));
 }
 
 static VALUE rb_bindist(mod, n, p, x)
-    VALUE n, p, x;
+    VALUE mod, n, p, x;
 {
     Need_Float(p);
     return rb_float_new(bindist(FIX2INT(n), RFLOAT_VALUE(p), FIX2INT(x)));
 }
 
 static VALUE rb_binX_(mod, n, p, x)
-    VALUE n, p, x;
+    VALUE mod, n, p, x;
 {
     Need_Float(p);
     return rb_float_new(bindist(FIX2INT(n), RFLOAT_VALUE(p), FIX2INT(x)));
 }
 
 static VALUE rb_bin_x(mod, n, p, x)
-    VALUE n, p, x;
+    VALUE mod, n, p, x;
 {
     Need_Float(p);
     return rb_float_new(bindist(FIX2INT(n), 1.0 - (RFLOAT_VALUE(p)), FIX2INT(n) - FIX2INT(x)));
 }
 
 static VALUE rb_poissondens(mod, m, x)
-    VALUE m, x;
+    VALUE mod, m, x;
 {
     Need_Float(m);
     return rb_float_new(poissondens(RFLOAT_VALUE(m), FIX2INT(x)));
 }
 
 static VALUE rb_poissondist(mod, m, x)
-    VALUE m, x;
+    VALUE mod, m, x;
 {
     Need_Float(m);
     return rb_float_new(poissondist(RFLOAT_VALUE(m), FIX2INT(x)));
 }
 
 static VALUE rb_poissonX_(mod, m, x)
-    VALUE m, x;
+    VALUE mod, m, x;
 {
     Need_Float(m);
     return rb_float_new(poissondist(RFLOAT_VALUE(m), FIX2INT(x)));
@@ -751,7 +751,7 @@ static VALUE rb_poissonX_(mod, m, x)
 
 /*
   static VALUE rb_poisson_x(mod, m, x)
-  VALUE m, x;
+  VALUE mod, m, x;
   {
   Need_Float(m);
   return rb_float_new(1.0 - poissondist((RFLOAT_VALUE(m)), FIX2INT(x) - 1));
@@ -764,13 +764,13 @@ void
 Init_statistics2(void)
 {
     int i;
-    char *checkMethods[] = { "normaldist", "normalxXX_", "normal__X_", "normal___x", "normalx__x",
-                             "pnormaldist", "pnormalxXX_", "pnormal__X_", "pnormal___x", "pnormalx__x",
-                             "chi2dist", "chi2X_", "chi2_x", "pchi2dist", "pchi2X_", "pchi2_x",
-                             "tdist", "txXX_", "t__X_", "t___x", "tx__x", "ptdist", "ptxXX_", "pt__X_", "pt___x", "ptx__x",
-                             "fdist", "fX_", "f_x", "pfdist", "pfX_", "pf_x",
-                             "bindens", "bindist", "binX_", "bin_x",
-                             "poissondens", "poissondist", "poissonX_", "poisson_x" };
+    const char *checkMethods[] = { "normaldist", "normalxXX_", "normal__X_", "normal___x", "normalx__x",
+                                   "pnormaldist", "pnormalxXX_", "pnormal__X_", "pnormal___x", "pnormalx__x",
+                                   "chi2dist", "chi2X_", "chi2_x", "pchi2dist", "pchi2X_", "pchi2_x",
+                                   "tdist", "txXX_", "t__X_", "t___x", "tx__x", "ptdist", "ptxXX_", "pt__X_", "pt___x", "ptx__x",
+                                   "fdist", "fX_", "f_x", "pfdist", "pfX_", "pf_x",
+                                   "bindens", "bindist", "binX_", "bin_x",
+                                   "poissondens", "poissondist", "poissonX_", "poisson_x" };
     VALUE methodDefined = rb_intern("private_method_defined?"),
           removeMethod  = rb_intern("remove_method");
     
