@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'hoe'
-require 'lib/statistics2/version'
+require './lib/statistics2/version'
 
 EXT = "ext/statistics2.so"
 
