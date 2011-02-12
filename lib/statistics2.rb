@@ -1,5 +1,5 @@
 $:.unshift File.dirname(__FILE__)
-$:.unshift File.join(File.dirname(__FILE__), '..', 'ext/statistics2')
+$:.unshift File.join(File.dirname(__FILE__), '..', 'ext', 'statistics2')
 
 require 'statistics2/version'
 
@@ -602,9 +602,11 @@ module Statistics2
   module_function :poissondens, :poissondist, :poissonX_, :poisson_x
 end
 
-if !defined?(Statistics2::NO_EXT) || !Statistics2::NO_EXT
-  require 'statistics2.so'
+if !defined?(Statistics2::NO_EXT || !Statistics2::NO_EXT)
+  # C extension or noop.
+  require 'statistics2/statistics2'
 end
+
 
 if $0 == __FILE__
   if ARGV.empty?

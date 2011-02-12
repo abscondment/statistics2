@@ -7,7 +7,7 @@ $test = true
 require 'test/unit' unless defined?(Hoe)
 require 'sample_tbl'
 
-require 'statistics2.so'
+require 'statistics2'
 $mod = Statistics2
 
 

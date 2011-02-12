@@ -2,5 +2,7 @@ examples/*.tbl
 *.o
 *.so
 ext/statistics2/Makefile
+lib/statistics2/statistics2.rb
 doc
 pkg
+tmp
