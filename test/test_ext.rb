@@ -1,25 +1,19 @@
-$:.unshift File.dirname(__FILE__)
-$:.unshift File.join(File.dirname(__FILE__), '..', 'ext')
-$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-
 $test = true
 
-require 'test/unit' unless defined?(Hoe)
+require 'test/unit'
 require 'sample_tbl'
 
-require 'statistics2.so'
+require '_statistics2'
 $mod = Statistics2
-
 
 # Request extension to be skipped.
 module Statistics20
   NO_EXT = true
 end
-eval(File.read('lib/statistics2.rb').gsub(/Statistics2/, 'Statistics20'))
+eval(File.read(File.expand_path('../../lib/statistics2.rb', __FILE__)).gsub(/Statistics2/, 'Statistics20'))
 $mod0 = Statistics20
 
-class T_Statistics2 < Test::Unit::TestCase
-
+class TestStatistics2 < Test::Unit::TestCase
   def test_normal
     norm_tbl(0.0, 3.1) do |x|
       a, b = $mod.normal___x(x), $mod0.normal___x(x)
@@ -49,5 +43,4 @@ class T_Statistics2 < Test::Unit::TestCase
       end
     end
   end
-  
 end

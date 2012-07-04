@@ -1,7 +1,7 @@
-/* 
+/*
    statistics2.c
 
-   distributions of statistics2             
+   distributions of statistics2
    by Shin-ichiro HARA
 
    2003.09.25
@@ -39,7 +39,7 @@ static double p_nor(double z)
         e = 0;
         z = -z;
     }
-                
+
     z2 = z * z;
     t = p = z * exp(-0.5 * z2) / sqrt(2 * PI);
     for (i = 3; i < 200; i += 2) {
@@ -233,7 +233,7 @@ double ptsub(double q, int n)
 			s /= 10.;
 		}
 	}
-} 
+}
 
 /* inverse of t-distribution ([2]) */
 /* (-\infty, -q/2] + [q/2, \infty) */
@@ -413,7 +413,7 @@ static int perm(n, x)
     }
     return r;
 }
-  
+
 static int combi(n, x)
     int n, x;
 {
@@ -429,7 +429,7 @@ float p;
     float q = 1.0 - p;
     return combi(n, x) * pow(p, x) * pow(q, n - x);
 }
-  
+
 static float bindist(n, p, x)
     int n, x;
 float p;
@@ -761,31 +761,10 @@ static VALUE rb_poissonX_(mod, m, x)
 /* ruby interface */
 
 void
-Init_statistics2(void)
+Init__statistics2(void)
 {
-    uint i;
-    const char *checkMethods[] = { "normaldist", "normalxXX_", "normal__X_", "normal___x", "normalx__x",
-                                   "pnormaldist", "pnormalxXX_", "pnormal__X_", "pnormal___x", "pnormalx__x",
-                                   "chi2dist", "chi2X_", "chi2_x", "pchi2dist", "pchi2X_", "pchi2_x",
-                                   "tdist", "txXX_", "t__X_", "t___x", "tx__x", "ptdist", "ptxXX_", "pt__X_", "pt___x", "ptx__x",
-                                   "fdist", "fX_", "f_x", "pfdist", "pfX_", "pf_x",
-                                   "bindens", "bindist", "binX_", "bin_x",
-                                   "poissondens", "poissondist", "poissonX_", "poisson_x" };
-    VALUE methodDefined = rb_intern("private_method_defined?"),
-          removeMethod  = rb_intern("remove_method");
-    
+    rb_mStatistics2 = rb_define_module("Statistics2");
 
-    rb_mStatistics2 = rb_define_module("Statistics2");    
-    /* Remove any preexisting methods before adding the new ones */
-    for (i = 0; i < (sizeof(checkMethods) / sizeof(checkMethods[0])); i++) {
-        if (RTEST(rb_funcall(rb_mStatistics2, methodDefined, 1, rb_str_new2(checkMethods[i])))) {
-            /* Remove instance method */
-            rb_funcall(rb_mStatistics2, removeMethod, 1, rb_str_new2(checkMethods[i]));
-            /* Remove the singleton method */
-            rb_funcall(rb_singleton_class(rb_mStatistics2), removeMethod, 1, rb_str_new2(checkMethods[i]));
-        }
-    }
-    
     rb_define_module_function(rb_mStatistics2, "normaldist", rb_normaldist, 1);
     rb_define_module_function(rb_mStatistics2, "normalxXX_", rb_normalxXX_ , 1);
     rb_define_module_function(rb_mStatistics2, "normal__X_", rb_normal__X_, 1);

@@ -8,9 +8,7 @@ Authors: Shin-ichiro HARA(sinara@blade.nagaokaut.ac.jp), Brendan Ribera (brendan
 
 == INSTALL:
 
- * Get the gem from Github!
-    $ gem sources -a http://gems.github.com (you only have to do this once)
-    $ sudo gem install abscondment-statistics2
+  $ gem install statistics2
 
 == USAGE:
 

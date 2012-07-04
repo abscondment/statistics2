@@ -113,7 +113,6 @@ def show_tbl(mod, dist, *opts)
   end
 end
 
-
 if $0 == __FILE__
   if ARGV.empty?
     puts "-- This script makes tables of distributions"
@@ -124,10 +123,6 @@ if $0 == __FILE__
     puts "      #$0 f 0.01"
     exit
   end
-  
-  $:.unshift File.dirname(__FILE__)
-  $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-  $:.unshift File.join(File.dirname(__FILE__), '..', 'ext')
 
   require 'statistics2'
   show_tbl(Statistics2, *ARGV)
