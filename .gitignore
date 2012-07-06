@@ -1,6 +1,8 @@
 examples/*.tbl
 ext/*.o
 ext/*.so
+ext/*.bundle
 ext/Makefile
 doc
 pkg
+.rbenv-version
