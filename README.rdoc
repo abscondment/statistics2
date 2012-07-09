@@ -3,19 +3,15 @@
 Authors: Shin-ichiro HARA(sinara@blade.nagaokaut.ac.jp), Brendan Ribera (brendan.ribera@gmail.com)
 
 == REQUIREMENTS:
- 
+
  * ruby-1.8 or higher
 
- 
 == INSTALL:
 
- * Get the gem from Github!
-    $ gem sources -a http://gems.github.com (you only have to do this once)
-    $ sudo gem install abscondment-statistics2
+  $ gem install statistics2
 
-    
 == USAGE:
- 
+
 * Example:
     require "statistics2"
     puts Statistics2.normaldist(0.27) #=> 0.60641987319804
@@ -23,7 +19,7 @@ Authors: Shin-ichiro HARA(sinara@blade.nagaokaut.ac.jp), Brendan Ribera (brendan
 * If you don't want to use the C extension:
     require "statistics2/no_ext"
     puts Statistics2.normaldist(0.27) #=> 0.606419873198039 (delta of 9.99200722162641e-16)
-    
+
 == LICENSE:
- 
+
 Ruby's (see http://www.ruby-lang.org/en/LICENSE.txt)

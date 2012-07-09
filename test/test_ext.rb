@@ -1,42 +1,36 @@
-$:.unshift File.dirname(__FILE__)
-$:.unshift File.join(File.dirname(__FILE__), '..', 'ext')
-$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-
 $test = true
 
-require 'test/unit' unless defined?(Hoe)
+require 'test/unit'
 require 'sample_tbl'
 
-require 'statistics2.so'
-$mod = Statistics2
+require 'statistics2'
 
+class TestStatistics2 < Test::Unit::TestCase
+  module Base
+    extend Statistics2::Base
+  end
 
-# Request extension to be skipped.
-module Statistics20
-  NO_EXT = true
-end
-eval(File.read('lib/statistics2.rb').gsub(/Statistics2/, 'Statistics20'))
-$mod0 = Statistics20
-
-class T_Statistics2 < Test::Unit::TestCase
+  module Extension
+    extend Statistics2::Extension
+  end
 
   def test_normal
     norm_tbl(0.0, 3.1) do |x|
-      a, b = $mod.normal___x(x), $mod0.normal___x(x)
+      a, b = Base.normal___x(x), Extension.normal___x(x)
       assert_in_delta a, b, 0.000001
     end
   end
 
   def test_chi
     chi2_tbl() do |n, x|
-      a, b = $mod.pchi2_x(n, x), $mod0.pchi2_x(n, x)
+      a, b = Base.pchi2_x(n, x), Extension.pchi2_x(n, x)
       assert_in_delta a/b, 1.0, 0.01
     end
   end
 
   def test_t
     t_tbl() do |n, x|
-      a, b = $mod.ptx__x(n, x), $mod.ptx__x(n, x)
+      a, b = Base.ptx__x(n, x), Extension.ptx__x(n, x)
       assert_in_delta a, b, 0.001
     end
   end
@@ -44,10 +38,9 @@ class T_Statistics2 < Test::Unit::TestCase
   def test_f
     [0.01, 0.025, 0.05].each do |opt|
       f_tbl(opt) do |n1, n2, y|
-        a, b = $mod.pf_x(n1, n2, y), $mod0.pf_x(n1, n2, y)
+        a, b = Base.pf_x(n1, n2, y), Extension.pf_x(n1, n2, y)
         assert_in_delta a/b, 1.0, 0.01
       end
     end
   end
-  
 end

@@ -1,16 +1,12 @@
-$:.unshift File.dirname(__FILE__)
-$:.unshift File.join(File.dirname(__FILE__), '..', 'ext')
-$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-
 $test = true
 
-require 'test/unit' unless defined?(Hoe)
+require 'test/unit'
 require 'sample_tbl'
-require 'lib/statistics2'
+require 'statistics2'
 
-class T_Statistics2 < Test::Unit::TestCase
+class TestStatistics2Inverted < Test::Unit::TestCase
   $mod = Statistics2
-  
+
   def inv(s); "p" + s; end
 
   def test_inv_normal
