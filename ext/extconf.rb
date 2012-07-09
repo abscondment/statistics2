@@ -1,2 +1,2 @@
 require "mkmf"
-create_makefile("statistics2")
+create_makefile("_statistics2")
