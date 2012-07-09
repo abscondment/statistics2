@@ -427,15 +427,15 @@ static float bindens(n, p, x)
     int n, x;
 float p;
 {
-    float q = 1.0 - p;
-    return combi(n, x) * pow(p, x) * pow(q, n - x);
+    float q = 1.0f - p;
+    return combi(n, x) * (float)pow(p, x) * (float)pow(q, n - x);
 }
 
 static float bindist(n, p, x)
     int n, x;
 float p;
 {
-    float s = 0.0;
+    float s = 0.0f;
     int k;
     for (k = 0; k <= x; k ++) {
         s += bindens(n, p, k);
@@ -447,15 +447,15 @@ static float poissondens(m, x)
     float m;
 int x;
 {
-    if (x < 0) return 0.0 ;
-    return pow(m, x) * exp(-m) / perm(x, x);
+    if (x < 0) return 0.0f;
+    return (float)pow(m, x) * (float)exp(-m) / perm(x, x);
 }
 
 static float poissondist(m, x)
     float m;
 int x;
 {
-    float s = 0.0;
+    float s = 0.0f;
     int k;
     for (k = 0; k <= x; k ++) {
         s += poissondens(m, k);
