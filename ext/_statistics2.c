@@ -19,6 +19,7 @@
 #define Need_Float(x) (x) = rb_Float(x)
 
 VALUE rb_mStatistics2;
+VALUE rb_mExtension;
 
 /* normal distribution ([1]) */
 /* P( (-\infty, z] ) */
@@ -764,58 +765,59 @@ void
 Init__statistics2(void)
 {
     rb_mStatistics2 = rb_define_module("Statistics2");
+    rb_mExtension = rb_define_module_under(rb_mStatistics2, "Extension");
 
-    rb_define_module_function(rb_mStatistics2, "normaldist", rb_normaldist, 1);
-    rb_define_module_function(rb_mStatistics2, "normalxXX_", rb_normalxXX_ , 1);
-    rb_define_module_function(rb_mStatistics2, "normal__X_", rb_normal__X_, 1);
-    rb_define_module_function(rb_mStatistics2, "normal___x", rb_normal___x, 1);
-    rb_define_module_function(rb_mStatistics2, "normalx__x", rb_normalx__x, 1);
+    rb_define_method(rb_mExtension, "normaldist", rb_normaldist, 1);
+    rb_define_method(rb_mExtension, "normalxXX_", rb_normalxXX_ , 1);
+    rb_define_method(rb_mExtension, "normal__X_", rb_normal__X_, 1);
+    rb_define_method(rb_mExtension, "normal___x", rb_normal___x, 1);
+    rb_define_method(rb_mExtension, "normalx__x", rb_normalx__x, 1);
 
-    rb_define_module_function(rb_mStatistics2, "pnormaldist", rb_pnormaldist, 1);
-    rb_define_module_function(rb_mStatistics2, "pnormalxXX_", rb_pnormalxXX_, 1);
-    rb_define_module_function(rb_mStatistics2, "pnormal__X_", rb_pnormal__X_, 1);
-    rb_define_module_function(rb_mStatistics2, "pnormal___x", rb_pnormal___x, 1);
-    rb_define_module_function(rb_mStatistics2, "pnormalx__x", rb_pnormalx__x, 1);
-
-
-    rb_define_module_function(rb_mStatistics2, "chi2dist", rb_chi2dist, 2);
-    rb_define_module_function(rb_mStatistics2, "chi2X_", rb_chi2X_ , 2);
-    rb_define_module_function(rb_mStatistics2, "chi2_x", rb_chi2_x, 2);
-
-    rb_define_module_function(rb_mStatistics2, "pchi2dist", rb_pchi2dist, 2);
-    rb_define_module_function(rb_mStatistics2, "pchi2X_", rb_pchi2X_, 2);
-    rb_define_module_function(rb_mStatistics2, "pchi2_x", rb_pchi2_x, 2);
+    rb_define_method(rb_mExtension, "pnormaldist", rb_pnormaldist, 1);
+    rb_define_method(rb_mExtension, "pnormalxXX_", rb_pnormalxXX_, 1);
+    rb_define_method(rb_mExtension, "pnormal__X_", rb_pnormal__X_, 1);
+    rb_define_method(rb_mExtension, "pnormal___x", rb_pnormal___x, 1);
+    rb_define_method(rb_mExtension, "pnormalx__x", rb_pnormalx__x, 1);
 
 
-    rb_define_module_function(rb_mStatistics2, "tdist", rb_tdist, 2);
-    rb_define_module_function(rb_mStatistics2, "txXX_", rb_txXX_ , 2);
-    rb_define_module_function(rb_mStatistics2, "t__X_", rb_t__X_, 2);
-    rb_define_module_function(rb_mStatistics2, "t___x", rb_t___x, 2);
-    rb_define_module_function(rb_mStatistics2, "tx__x", rb_tx__x, 2);
+    rb_define_method(rb_mExtension, "chi2dist", rb_chi2dist, 2);
+    rb_define_method(rb_mExtension, "chi2X_", rb_chi2X_ , 2);
+    rb_define_method(rb_mExtension, "chi2_x", rb_chi2_x, 2);
 
-    rb_define_module_function(rb_mStatistics2, "ptdist", rb_ptdist, 2);
-    rb_define_module_function(rb_mStatistics2, "ptxXX_", rb_ptxXX_, 2);
-    rb_define_module_function(rb_mStatistics2, "pt__X_", rb_pt__X_, 2);
-    rb_define_module_function(rb_mStatistics2, "pt___x", rb_pt___x, 2);
-    rb_define_module_function(rb_mStatistics2, "ptx__x", rb_ptx__x, 2);
+    rb_define_method(rb_mExtension, "pchi2dist", rb_pchi2dist, 2);
+    rb_define_method(rb_mExtension, "pchi2X_", rb_pchi2X_, 2);
+    rb_define_method(rb_mExtension, "pchi2_x", rb_pchi2_x, 2);
 
 
-    rb_define_module_function(rb_mStatistics2, "fdist", rb_fdist, 3);
-    rb_define_module_function(rb_mStatistics2, "fX_", rb_fX_ , 3);
-    rb_define_module_function(rb_mStatistics2, "f_x", rb_f_x, 3);
+    rb_define_method(rb_mExtension, "tdist", rb_tdist, 2);
+    rb_define_method(rb_mExtension, "txXX_", rb_txXX_ , 2);
+    rb_define_method(rb_mExtension, "t__X_", rb_t__X_, 2);
+    rb_define_method(rb_mExtension, "t___x", rb_t___x, 2);
+    rb_define_method(rb_mExtension, "tx__x", rb_tx__x, 2);
 
-    rb_define_module_function(rb_mStatistics2, "pfdist", rb_pfdist, 3);
-    rb_define_module_function(rb_mStatistics2, "pfX_", rb_pfX_, 3);
-    rb_define_module_function(rb_mStatistics2, "pf_x", rb_pf_x, 3);
+    rb_define_method(rb_mExtension, "ptdist", rb_ptdist, 2);
+    rb_define_method(rb_mExtension, "ptxXX_", rb_ptxXX_, 2);
+    rb_define_method(rb_mExtension, "pt__X_", rb_pt__X_, 2);
+    rb_define_method(rb_mExtension, "pt___x", rb_pt___x, 2);
+    rb_define_method(rb_mExtension, "ptx__x", rb_ptx__x, 2);
 
 
-    rb_define_module_function(rb_mStatistics2, "bindens", rb_bindens, 3);
-    rb_define_module_function(rb_mStatistics2, "bindist", rb_bindist, 3);
-    rb_define_module_function(rb_mStatistics2, "binX_", rb_binX_, 3);
-    rb_define_module_function(rb_mStatistics2, "bin_x", rb_bin_x, 3);
+    rb_define_method(rb_mExtension, "fdist", rb_fdist, 3);
+    rb_define_method(rb_mExtension, "fX_", rb_fX_ , 3);
+    rb_define_method(rb_mExtension, "f_x", rb_f_x, 3);
 
-    rb_define_module_function(rb_mStatistics2, "poissondens", rb_poissondens, 2);
-    rb_define_module_function(rb_mStatistics2, "poissondist", rb_poissondist, 2);
-    rb_define_module_function(rb_mStatistics2, "poissonX_", rb_poissonX_, 2);
-    rb_define_module_function(rb_mStatistics2, "poisson_x", rb_bin_x, 2);
+    rb_define_method(rb_mExtension, "pfdist", rb_pfdist, 3);
+    rb_define_method(rb_mExtension, "pfX_", rb_pfX_, 3);
+    rb_define_method(rb_mExtension, "pf_x", rb_pf_x, 3);
+
+
+    rb_define_method(rb_mExtension, "bindens", rb_bindens, 3);
+    rb_define_method(rb_mExtension, "bindist", rb_bindist, 3);
+    rb_define_method(rb_mExtension, "binX_", rb_binX_, 3);
+    rb_define_method(rb_mExtension, "bin_x", rb_bin_x, 3);
+
+    rb_define_method(rb_mExtension, "poissondens", rb_poissondens, 2);
+    rb_define_method(rb_mExtension, "poissondist", rb_poissondist, 2);
+    rb_define_method(rb_mExtension, "poissonX_", rb_poissonX_, 2);
+    rb_define_method(rb_mExtension, "poisson_x", rb_bin_x, 2);
 }
