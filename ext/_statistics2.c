@@ -34,8 +34,6 @@ static double p_nor(double z)
 
     if (z > 0) {
         e = 1;
-    } else if (z == 0) {
-        return 0.5;
     } else {
         e = 0;
         z = -z;
