@@ -244,7 +244,8 @@ double pt(double q, int n)
 
 	if(q < 1.e-5 || q > 1. || n < 1)
 	{
-		fprintf(stderr,"Error : Illegal parameter in pt()!\n");
+        const char *illegal_parameter = (n < 1) ? "n" : "q";
+		fprintf(stderr,"Error : Illegal parameter '%s' in pt(q: %f, n: %d)!\n", illegal_parameter, q, n);
 		return 0.;
 	}
 
@@ -336,7 +337,8 @@ double pf(double q, int n1, int n2)
 
 	if(q < 0. || q > 1. || n1 < 1 || n2 < 1)
 	{
-		fprintf(stderr,"Error : Illegal parameter in pf()!\n");
+        const char *illegal_parameter = (n1 < 1) ? "n1" : (n2 < 1) ? "n2" : "q";
+        fprintf(stderr,"Error : Illegal parameter '%s' in pf(q: %f, n1: %d, n2: %d)!\n", illegal_parameter, q, n1, n2);
 		return 0.;
 	}
 
